@@ -2,6 +2,8 @@ FROM rtux/debian-diamond
 
 COPY *.deb /tmp/build
 COPY diamond.conf /etc/diamond/diamond.conf
+COPY write-config.sh /bin/write-config.sh
 RUN DEB=$(ls /tmp/build); dpkg -i $(echo $DEB)
 RUN apt-get update && apt-get install -y python-pip python-dev && pip install influxdb==0.4.1 psutil
-CMD diamond -f -l
+
+CMD /bin/write-config.sh /etc/diamond/diamond.conf && cat /etc/diamond/diamond.conf && diamond -f -l
