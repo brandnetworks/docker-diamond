@@ -1,3 +1,3 @@
 FROM debian
 
-RUN apt-get update && apt-get install -y make pbuilder python-mock python-configobj python-support cdbs git
+RUN apt-get update && apt-get install -y make python-configobj
